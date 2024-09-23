@@ -1,0 +1,201 @@
+<ion-content>
+    <div class="container">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-subtitle>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-img src="./assets/logos-login/LOGO_MINCIENCIAS.png"></ion-img>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-img src="./assets/logos-login/LOGO_MINISTERIO_CIENCIA.jpg"></ion-img>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-img src="./assets/logos-login/LOGO_ACOPEL_COPIA.png"></ion-img>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-img src="./assets/logos-login/LOGO_UNIMINUTO.png"></ion-img>
+                        </ion-col>                        
+                    </ion-row>
+                </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-segment (ion-Change)="segmentChanged($event)" [(ngModel)]="vista">
+                    <ion-segment-button value="uniminuto">
+                        <ion-label>UNIMINUTO</ion-label>
+                    </ion-segment-button>
+                    <!-- <ion-segment-button value="externo">
+                        <ion-label>EXTERNO</ion-label>
+                    </ion-segment-button> -->
+                </ion-segment>
+
+                <div [ngSwitch]="vista">
+                    <div *ngSwitchCase="'uniminuto'">
+                        <form #formulario="ngForm" (ngSubmit)="loginUniminuto()" value="default">
+                            <ion-item>
+                                <ion-label position="floating">Correo <ion-text color="danger">*</ion-text></ion-label>
+                                <ion-input [(ngModel)]="usuario.correoInstitucional" name="correoInstitucional"
+                                    type="text" required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Contraseña <ion-text
+                                        color="danger">*</ion-text></ion-label>
+                                <ion-input [(ngModel)]="usuario.password" name="password" type="password"
+                                    required></ion-input>
+                            </ion-item>
+                            <ion-button *ngIf="!isLoading" expand="full" type="submit" shape="round" color="violeta"
+                                [disabled]="formulario.invalid" class="color-boton">
+                                Ingresar
+                            </ion-button>
+                            <ion-button *ngIf="isLoading" expand="full" type="submit" shape="round" color="violeta"
+                                disabled="true" class="color-boton">
+                                Ingresando
+                                <ion-spinner name="dots"></ion-spinner>
+                            </ion-button>
+                        </form>
+                        <ion-button class="button" expand="full" shape="round" (click)="changeView('contrasena')"
+                            fill="clear">
+                            Cambiar contraseña
+                        </ion-button>
+                    </div>
+
+                    <div *ngSwitchCase="'contrasena'">
+                        <form #formulario="ngForm" (ngSubmit)="cambiarContrasena()" value="default">
+                            <ion-item>
+                                <ion-label position="floating">Correo <ion-text color="danger">*</ion-text></ion-label>
+                                <ion-input [(ngModel)]="cambioContrasena.email" name="correo" type="text"
+                                    required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Contraseña <ion-text
+                                        color="danger">*</ion-text></ion-label>
+                                <ion-input [(ngModel)]="cambioContrasena.contrasena" name="contrasena" type="password"
+                                    required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Nueva contraseña<ion-text
+                                        color="danger">*</ion-text></ion-label>
+                                <ion-input [(ngModel)]="cambioContrasena.nuevaContrasena" name="nuevaContrasena"
+                                    type="password" required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Confirmar contraseña<ion-text
+                                        color="danger">*</ion-text></ion-label>
+                                <ion-input [(ngModel)]="cambioContrasena.confirmarContrasena" name="confirmarContrasena"
+                                    type="password" required></ion-input>
+                            </ion-item>
+                            <ion-button *ngIf="!isChangePass" expand="full" type="submit" shape="round" color="violeta"
+                                [disabled]="formulario.invalid" class="color-boton">
+                                Cambiar Contraseña
+                            </ion-button>
+                            <ion-button *ngIf="isChangePass" expand="full" type="submit" shape="round" color="violeta"
+                                disabled="true" class="color-boton">
+                                Cambiando contraseña
+                                <ion-spinner name="dots"></ion-spinner>
+                            </ion-button>
+                            <ion-button class="button" expand="full" shape="round" (click)="changeView('uniminuto')"
+                                fill="clear">
+                                Volver Login
+                            </ion-button>
+                        </form>
+                    </div>
+                </div>
+
+                <ion-button class="button" expand="full" shape="round" id="politica-tratamiendo" fill="clear">
+                    Política de tratamiento
+                </ion-button>
+                <ion-modal #modal trigger="politica-tratamiendo" [presentingElement]="presentingElement">
+                    <ng-template>
+                        <ion-header>
+                            <ion-toolbar>
+                                <ion-title>Política de tratamiento</ion-title>
+                                <ion-buttons slot="end">
+                                    <ion-button (click)="modal.dismiss()">Cerrar</ion-button>
+                                </ion-buttons>
+                            </ion-toolbar>
+                        </ion-header>
+                        <ion-content>
+                            <p class="ion-padding-horizontal">
+                                Esta aplicación móvil se desarrolla bajo la convocatoria del Ministerio de Ciencia y
+                                Tecnología (Minciencias) 874-2020 con el proyecto de investigación “Salud mental y
+                                bienestar biopsicosocial de cuidadores y pacientes con Mucopolisacaridosis por medio del
+                                uso de las Tics”, donde las jóvenes investigadoras y tutora de este proyecto son las
+                                autoras intelectuales y quienes recopilan la información del uso de la aplicación móvil
+                                con el propósito del desarrollo de la investigación que se está llevando a cabo.
+                            </p>
+                            <p class="ion-padding-horizontal">
+                                Estos términos establecen los términos y condiciones bajo los cuales puede usar nuestra
+                                aplicación y los servicios ofrecidos por nosotras. Esta aplicación móvil ofrece a los
+                                visitantes información veraz y pertinente para cuidadores y pacientes con
+                                Mucopolisacaridosis enfocada a la Mucopolisacaridosis, Calidad de vida, Bienestar, Salud
+                                mental y Líneas de apoyo, con el propósito de realizar un proceso informativo sobre
+                                estas dimensiones. Al acceder o usar la aplicación móvil, usted aprueba que haya leído,
+                                entendido y aceptado estar sujeto a estos Términos:
+                            </p>
+                            <p class="ion-padding-horizontal">
+                                Para usar nuestra aplicación móvil, debe tener un registro previo el cual le dará
+                                permiso para utilizar la APP, este registro se realiza por parte de las investigadoras
+                                quienes con antelación realizaran la inscripción de cada uno de los usuarios, si usted
+                                es menor de edad debe contar con la supervisión de un adulto responsable y autorización
+                                para la utilización de esta. No es permitido el uso de la aplicación móvil si no cuenta
+                                con los permisos requeridos para hacerlo y si no cuenta con la aprobación de su
+                                representante legal en caso de ser menor de edad.
+                            </p>
+                            <p class="ion-padding-horizontal">
+                                Al hacer uso de esta aplicación móvil, acepta que: (i) Las autoras intelectuales tienen
+                                derecho de otorgar y restringir el acceso a la utilización de la aplicación. (ii) Usted
+                                es autónomo en la utilización de la aplicación, esta es una herramienta informativa y
+                                usted se hace responsable del uso que realice con ella, liberando de cualquier
+                                responsabilidad a las investigadoras y tutora de la investigación. (iii) Esta es una
+                                aplicación gratuita y no se cobrará por el uso de esta.
+                            </p>
+
+                            <p class="ion-padding-horizontal">
+                                El Servicio y todos los materiales incluidos, incluyendo imágenes, texto, gráficos,
+                                logotipos, patentes, derechos de autor, fotografías, audio, videos, música y todos los
+                                derechos de Propiedad Intelectual relacionados con ellos, son propiedad exclusiva de MPS
+                                APP.
+                            </p>
+
+                            <p class="ion-padding-horizontal">
+                                Se puede terminar o suspender de manera permanente o temporal su acceso a la aplicación
+                                sin previo aviso y responsabilidad por cualquier razón, incluso si a nuestra
+                                determinación usted incumple alguna disposición de estos términos o cualquier ley o
+                                regulación aplicable. Puede descontinuar el uso y solicitar la cancelación de su cuenta
+                                en cualquier momento. En la máxima medida permitida por la ley aplicable, las jóvenes
+                                investigadoras y/o tutora de MPS APP no asumirán responsabilidad alguna por (i) el uso
+                                inadecuado de la aplicación empleado por el usuario. (ii) errores o inexactitudes de
+                                contenido; (iii) lesiones personales o daños a la propiedad, de cualquier naturaleza que
+                                sean, como resultado de su acceso o uso de nuestra aplicación; y (iv) cualquier acceso
+                                no autorizado o uso de nuestros servidores seguros y / o toda la información personal
+                                almacenada en los mismos.
+                            </p>
+
+                            <p class="ion-padding-horizontal">
+                                Nos reservamos el derecho de modificar estos términos de vez en cuando a nuestra entera
+                                discreción. Por lo tanto, debe revisar estas páginas periódicamente. Cuando cambiemos
+                                los Términos de una manera material, se le notificara que se han realizado cambios
+                                importantes en los Términos. El uso continuado de la aplicación móvil después de dicho
+                                cambio constituye su aceptación de los nuevos Términos. Si no acepta alguno de estos
+                                términos o cualquier versión futura de los Términos, no use o acceda (o continue
+                                accediendo) a la aplicación móvil.
+                            </p>
+
+                            <p class="ion-padding-horizontal">
+                                Si tiene alguna pregunta sobre estos Términos y Condiciones, puede contactarnos:
+                            </p>
+                            <ol>
+                                <ul>
+                                    nollynataly@gmail.com
+                                </ul>
+                                <ul>
+                                    nolly.castaneda@uniminuto.edu
+                                </ul>
+                            </ol>
+                        </ion-content>
+                    </ng-template>
+                </ion-modal>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

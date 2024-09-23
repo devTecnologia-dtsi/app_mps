@@ -1,0 +1,7 @@
+{
+  "name": "mps",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,90 @@
+ion-label {
+    margin-right: 30px !important;
+    font-size: 0.6em !important;
+}
+
+ion-item {
+    color: #2A352F !important;
+}
+
+.textoButton {
+    font-size: 0.7em !important;
+    text-align: center !important;
+    display: block;
+    margin: auto;
+}
+
+.skeleton {
+    height: 90px !important;
+}
+
+.skeletonDown {
+    height: 15px !important;
+}
+
+span {
+    font-size: 0.8em !important;
+    font-weight: lighter !important;
+}
+
+ion-label {
+    font-weight: bold !important;
+}
+
+ion-icon {
+    margin-right: 5px !important;
+}
+
+.icon-menu {
+    display: block !important;
+    margin: auto !important;
+    width: 80% !important;
+}
+
+.col-icon {
+    margin-top: 10px !important;
+}
+
+ion-card {
+    margin: auto !important;
+    display: block !important;
+    box-shadow: none !important;
+    background-color: #FBD342 !important;
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+}
+
+ion-img {
+    height: 100% !important;
+    position: relative;
+}
+
+
+/* mosaico.component.scss */
+
+.content-overlay {
+    position: relative;
+    z-index: 1;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../../assets/img/imagen_fondo1.png'),
+        url('../../../assets/img/imagen_fondo2.png'),
+        url('../../../assets/img/imagen_fondo3.png');
+    background-repeat: repeat;
+    background-size: auto;
+    opacity: 0.2;
+}
+
+/* Ajusta el z-index si es necesario para que el contenido del div esté encima del fondo */
+.background {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+}

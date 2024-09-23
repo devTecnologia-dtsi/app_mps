@@ -1,0 +1,19 @@
+<ng-template #contentTemplate>
+  <ion-card *ngFor="let item of subModule" class="w-100">
+    <!-- <img alt="mps" src="https://ionicframework.com/docs/img/demos/card-media.png" /> -->
+    <img alt="mps" *ngIf="item.imagenTitulo" src="{{item.imagenTitulo}}" />
+    <ion-card-header *ngIf="item.titulo">
+      <ion-card-title>{{ item.titulo }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="item.isVideo">
+      <iframe width="100%" height="315" [src]="getUrl(item.contenido)" title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </ion-card-content>
+
+    <ion-card-content *ngIf="!item.isVideo && !item.isImage" [innerHTML]="item.contenido">
+      <!-- MPS son un grupo de enfermedades inusuales en las cuales el cuerpo presenta ausencia o no tiene suficiente de una enzima necesaria para descomponer las cadenas largas de moléculas de azúcar. -->
+    </ion-card-content>
+  </ion-card>
+</ng-template>

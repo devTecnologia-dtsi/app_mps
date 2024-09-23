@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="violeta">
+    <ion-title>MPS</ion-title>
+    <ion-buttons slot="end" (click)="salir()">
+      <ion-button> Salir </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed fullscreen class="background">
+    <ion-list *ngIf="isLoading" class="ion-text-center">
+      <ion-progress-bar type="indeterminate" color="violeta"></ion-progress-bar>
+      <ion-label>Se estan cargando tus modulos.</ion-label>
+    </ion-list>
+    <ion-row *ngIf="!isLoading">
+      <ion-col size="6" size-lg="6" size-md="6" size-sm="6" size-xs="6" class="col-icon" *ngFor="let c of componentes">
+        <a (click)="paginas(c.nombre, c.id)">
+          <ion-img [src]="c.imagen" class="icon-menu"></ion-img>
+        </a>
+        <label class="textoButton">{{c.descripcion}}</label>
+      </ion-col>
+      <ion-col size="6" size-lg="6" size-md="6" size-sm="6" size-xs="6" class="col-icon">
+        <strong>Autoras:</strong>
+        <p>María Fernanda Mendez-Murcia</p>
+        <p>Nolly Nataly Castañeda-Ibáñez</p>
+        <p>Yuli Paola Pérez-Garay</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

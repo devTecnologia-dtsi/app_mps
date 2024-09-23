@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="violeta">
+    <ion-buttons slot="start" (click)="volver()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>MPS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-list *ngIf="isLoading" class="ion-text-center">
+      <ion-progress-bar type="indeterminate" color="violeta"></ion-progress-bar>
+      <ion-label>Se estan cargando la informacion.</ion-label>
+    </ion-list>
+    <ion-row *ngIf="!isLoading">
+      <ion-card *ngFor="let item of content" class="w-100">
+        <img alt="mps" *ngIf="item.imagenTitulo" src="{{item.imagenTitulo}}" />
+        <ion-card-header *ngIf="item.titulo">
+          <ion-card-title>{{ item.titulo }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content *ngIf="item.isVideo">
+          <iframe width="100%" height="315" [src]="getUrl(item.contenido)" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </ion-card-content>
+
+        <ion-card-content *ngIf="!item.isVideo && !item.isImage" [innerHTML]="item.contenido">
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Mitos y Leyendas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Da click sobre la ruleta para empezar el juego</p>
+          <img src="../../../assets/icon/ruleta.avif" (click)="next()">
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>

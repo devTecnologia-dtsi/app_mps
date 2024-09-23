@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="violeta">
+    <ion-buttons slot="start" (click)="volver()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>MPS - PREGUNTAS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="preguntaActual">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ preguntaActual.pregunta }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let respuesta of preguntaActual.respuestas">
+            <ion-label>{{ respuesta }}</ion-label>
+            <ion-radio slot="start" [(ngModel)]="respuestaSeleccionada"
+              (ionFocus)="setRespuestaSeleccionada(respuesta)"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-button expand="block" color="danger" (click)="reiniciarJuego()">Reiniciar Juego</ion-button>
+    </ion-card>
+  </div>
+  <div *ngIf="!preguntaActual">
+    <ion-card>
+      <ion-card-content>
+        Muy bien, terminaste de responder todas las preguntas
+      </ion-card-content>
+      <ion-button expand="block" color="danger" (click)="reiniciarJuego()">Reiniciar Juego</ion-button>
+    </ion-card>
+  </div>
+</ion-content>
